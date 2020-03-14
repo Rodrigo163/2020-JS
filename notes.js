@@ -87,8 +87,182 @@
 // 	j++;
 // }
 
-const target = Math.floor(Math.random() * 10);
-let guess = Math.floor(Math.random() * 10);
-while (guess !== target) {
-	guess = Math.floor(Math.random() * 10);
+// const target = Math.floor(Math.random() * 10);
+// let guess = Math.floor(Math.random() * 10);
+// while (guess !== target) {
+// 	guess = Math.floor(Math.random() * 10);
+// }
+
+//BREAK
+//break to get out of loops
+
+//FOR...OF loop
+//loops over elements
+// for (let i of [ 1, 55, 3 ]) {
+// 	console.log(i);
+// }
+// for (let char of 'rodrigolopez') {
+// 	console.log(char.toUpperCase());
+// }
+
+//FOR..OF with objects
+// const movieReviews = {
+// 	Arrival     : 9.5,
+// 	LOTR        : 10,
+// 	'Jill Lill' : 9
+// };
+// for (let movie of Object.keys(movieReviews)) {
+// 	console.log(movie);
+// }
+// for (let movie of Object.values(movieReviews)) {
+// 	console.log(movie);
+// }
+// for (let movie of Object.keys(movieReviews)) {
+// 	console.log(`${movie} - ${movieReviews[movie]}`);
+// }
+
+//FOR..IN loop
+//loops over properties of objects
+// const jeopWinnings = {
+// 	regular : 235234,
+// 	watson  : 30000,
+// 	mi      : 23
+// };
+// //looping over properties
+// for (let prop in jeopWinnings) {
+// 	console.log(prop);
+// }
+
+// FUNCTIONS
+//return value vs console log
+
+// function square(x) {
+// 	console.log(x * x);
+// }
+// square(5);
+
+// function sum(x, y) {
+// 	return x + y;
+// }
+//Return method breaks out of the function no matter what
+
+// function isValidPassword(password, username) {
+// 	let valid = (password.length >= 8) & (password.indexOf(' ') === -1) & (password.indexOf(username) === -1);
+// 	return valid;
+// }
+
+// function averag(arr) {
+// 	let total = 0;
+// 	for (let num of arr) {
+// 		total += num;
+// 	}
+// 	return total / arr.length;
+// }
+
+// function isPangram(sent) {
+// 	let abc = 'abcdefghijklmnopqrstuvwxyz';
+// 	for (let letter of abc) {
+// 		if (sent.toLowerCase().indexOf(letter) === -1) {
+// 			return false;
+// 		}
+// 	}
+// 	return true;
+// }
+
+//using .includes
+// function isPangram(sent) {
+// 	let abc = 'abcdefghijklmnopqrstuvwxyz';
+// 	for (let letter of abc) {
+// 		if (!sent.toLowerCase().includes(letter)) {
+// 			return false;
+// 		}
+// 	}
+// 	return true;
+// }
+
+// function getCard() {
+// 	let values = [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A' ];
+// 	let suits = [ 'clubs', 'spades', 'hearts', 'diamonds' ];
+
+// 	let valueIndex = Math.floor(Math.random() * values.length);
+// 	let suitIndex = Math.floor(Math.random() * suits.length);
+
+// 	return `Value: ${values[valueIndex]} \n Suit: ${suits[suitIndex]}`;
+// }
+
+//AN ADVANCED LOOK AT FUNCTIONS
+//SCOPE: variable visibility, global/local in Python
+// block scope
+
+//a block of code is delimited by {}. Variables defined with let or const have limited scope inside.
+// with var the scoping rules are different, there is no block scope with var.
+// if (true) {
+// 	let animal = 'jaguar';
+// }
+// console.log(animal);
+//this solves problems with loop indices per example.
+
+//lexical scope
+// with nested functions: functions have access to variables define in their parent functions
+//First look in local scope, if not found look in parent function
+// but not the other way around.
+
+// function parent() {
+// 	let movie = 'lort';
+
+// 	function offspring() {
+// 		let x = 10;
+// 		console.log(movie.toUpperCase());
+// 	}
+// 	offspring();
+// 	return x;
+// }
+
+//function expressions
+// another way to define functions
+//In JS functions are objects so we can store them in variables
+//passing anonymous function
+// const square = function(num) {
+// 	return num * num;
+// };
+// //checking what it's made of
+// console.dir(square);
+
+// //passing named function expression
+// const product = function multiply(x, y){
+//     return x*y;
+// }
+
+//higher order functions
+//functions in an array
+function add(x, y) {
+	return x + y;
 }
+//mixing how we define them
+const mult = function(x, y) {
+	return x * y;
+};
+function sub(x, y) {
+	return x - y;
+}
+function div(x, y) {
+	return x / y;
+}
+
+const operations = [ add, mult, sub, div ];
+//to run any of them
+operations[0](4, 5);
+
+//doing all of them in a loop
+for (let func of operations) {
+	let result = func(4, 5);
+	console.log(result);
+}
+
+//we can also store them in objects
+const thing = {
+	doIt : add
+};
+thing['doIt'](5, 4);
+//but this is a method!
+thing.doIt(4, 5);
