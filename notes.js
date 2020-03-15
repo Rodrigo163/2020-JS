@@ -233,36 +233,130 @@
 //     return x*y;
 // }
 
-//higher order functions
+//higher order functions: fn that accept other functions as arguments and/or return a function
 //functions in an array
-function add(x, y) {
-	return x + y;
-}
-//mixing how we define them
-const mult = function(x, y) {
-	return x * y;
-};
-function sub(x, y) {
-	return x - y;
-}
-function div(x, y) {
-	return x / y;
-}
+// function add(x, y) {
+// 	return x + y;
+// }
+// //mixing how we define them
+// const mult = function(x, y) {
+// 	return x * y;
+// };
+// function sub(x, y) {
+// 	return x - y;
+// }
+// function div(x, y) {
+// 	return x / y;
+// }
 
-const operations = [ add, mult, sub, div ];
-//to run any of them
-operations[0](4, 5);
+// const operations = [ add, mult, sub, div ];
+// //to run any of them
+// operations[0](4, 5);
 
-//doing all of them in a loop
-for (let func of operations) {
-	let result = func(4, 5);
-	console.log(result);
-}
+// //doing all of them in a loop
+// for (let func of operations) {
+// 	let result = func(4, 5);
+// 	console.log(result);
+// }
 
-//we can also store them in objects
-const thing = {
-	doIt : add
-};
-thing['doIt'](5, 4);
-//but this is a method!
-thing.doIt(4, 5);
+// //we can also store them in objects
+// const thing = {
+// 	doIt : add
+// };
+// thing['doIt'](5, 4);
+// //but this is a method!
+// thing.doIt(4, 5);
+
+//fn as argument
+// function doTwice(fn) {
+// 	fn();
+// 	fn();
+// }
+
+// function haha() {
+// 	console.log('haha');
+// }
+
+//fn as return value
+//function generator/factory
+// function multiplyBy(num) {
+// 	return function(x) {
+// 		return x * num;
+// 	};
+// }
+// const double = multiplyBy(2);
+// const triple = multiplyBy(3);
+
+// function makeBetween(x, y) {
+// 	return function(num) {
+// 		return num >= x && num <= y;
+// 	};
+// }
+
+// const isUnderage = makeBetween(0, 18);
+
+//callbacks: a callback function is a fn passed into another fn as an arg
+// which is then invoked inside the outer fn.
+//in the doTwice example fn is a callback fn
+
+//Sometimes we just need a one time use function so we use anonymous ones
+// when we don't need to re use a fn
+// //example with setTimeout(function, time in ms)
+// function grump() {
+// 	alert('GO AWAY!');
+// }
+// setTimeout(grump, 10000);
+//works the same way with anonymous ones
+// setTimeout(function() {
+// 	alert('JIJI');
+// }, 5000);
+
+//adding button to page and putting script after all the content because it should all be
+// loaded by the time the script runs.
+//selecting the button
+// const btn = document.querySelector('button');
+// btn.addEventListener('click', function() {
+// 	alert('HALLO');
+// });
+
+// hoisting: JS creates all variables defined with var as undefined and then runs the code
+// that is why this below return undefined  and not an error
+// console.log(animal);
+// var animal = 'Zebra';
+
+//What JS is doing is:
+// var animal;
+// console.log(animal);
+// animal = 'Zebra';
+
+//JS doesn t hoist variables created with let
+
+// fn ARE hoisted, except when created via a function expression (using a variable)
+// with fn expressions the variable is hoisted (if declared with var, not with let) but not the fn
+
+//SECTION 10: APPLY FUNCTIONS TO COLLECTIONS OF DATA
+// INTRO TO ARRAY CALLBACK METHODS
+//In general these methods are meant to run a function once per element in an array
+
+// forEach: came before for (of). Kind of the same but also gives us option to use index
+//forEach(fn(element, index))
+// const nums = [ 1, 2, 3, 4, 5, 10, 20, 30 ];
+
+// nums.forEach(function(n, i) {
+// 	console.log(`${i}-th element: ${n * n}`);
+// });
+
+// map: creates new array from existing array. Original is unchanged
+// const texts = [ 'lol', 'haha', 'rlpa' ];
+// const textsCaps = texts.map(function(t) {
+// 	return t.toUpperCase(); //important to have return statement
+// });
+
+//Arrow functions intro: compact way of defining functions
+// const square = (x) => {
+// 	return x * x;
+// };
+// //if we have exactly one arg then no need for ()
+// const cube = (x) => {
+// 	return x * x * x;
+// };
