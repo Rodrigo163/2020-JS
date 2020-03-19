@@ -360,3 +360,117 @@
 // const cube = (x) => {
 // 	return x * x * x;
 // };
+
+//Even shorter arrow functions: implicit return when only returning one expression
+//const square = (n) => n * n;
+
+//but if it gets too long then no shame adding parenthesis and another line
+//const arrayq = (n) => (
+//    [ 1, 2, 3, 4, 5, 6, 7, 25346345673567, 563, 657356 ];
+//)
+// const nums = [ 1, 2, 3 ];
+// const doubles1 = nums.map(function(n) {
+// 	return n * 2;
+// });
+// const doubles2 = nums.map((n) => {
+// 	return n * 2;
+// });
+// const doubles3 = nums.map((n) => n * 2);
+
+// const parityList = nums.map((n) => (n % 2 === 0 ? 'even' : 'odd'));
+
+// find: receives a function that returns true or false for every element of the array
+// and returns the first value that returned true.
+
+// let movies = [ 'The Fantastic Mr. Fox', 'Mr. and Mrs. Smith', 'Mrs. Doubtfire' ];
+
+// const movie = movies.find((m) => {
+// 	return m.includes('Mrs');
+// });
+
+// const movie2 = movies.find((m) => m.indexOf('Mrs.') === 0);
+
+// filter: Creates a new array with all elements that pass the test implemented by the provided function
+// the callback function also has to return a boolean value.
+// the original is not modified
+
+// const nums = [ 1, 2, 3, 4, 5, 6 ];
+
+// const odds = nums.filter((n) => (n % 2 === 1 ? true : false));
+
+//Every: tests wheter all alements in the array pass the provided boolean callback function
+// const words = [ 'dog', 'dig', 'log', 'bag', 'wag' ];
+
+// const all3Letters = words.every((w) => w.length === 3);
+// const allEndInG = words.every((w) => {
+// 	let lastLetter = w.slice(-1);
+// 	return lastLetter === 'g';
+// });
+// //some: similar but returns true if ANY of the array elements pass the test function
+
+// const someElementHasI = words.some((w) => w.indexOf('i') !== -1);
+
+// //sort revisited:
+// const prices = [ 400.43, 22.3, 31, 1, 1000 ];
+
+// prices.sort(); //converts to str and sorts.
+
+// //To change this we have to pass a compare function
+// // this function will compare a and b and return:
+// // less than 0 -> sort a before b
+// // 0 -> leaves a and b unchanged wrt each other
+// // greater than 0 -> sorts b before a
+// //these methods modify the original array. All three variables are pointing to the same array.
+// const ascSort = prices.sort((a, b) => a - b);
+
+// const desSort = prices.sort((a, b) => b - a);
+
+// // if we want to save the sorted version into a new array we can slice first and make a copy
+// const ascSort2 = prices.slice().sort((a, b) => a - b);
+
+// // how to sort objects?
+// // if we had the example with books that have a numerical rating property
+// // instead of a-b ==> a.rating - b.rating
+// // compare functions can get very complex to allow diff sorting methods.
+
+// reduce: executes a reducer function on each element of the array
+// resulting in a single value
+
+// const nums = [ 1, 33, 64, 10 ];
+
+// //accumulator will store the accumulated last value which we are keeping track of.
+// const suma = nums.reduce((accumulator, currentValue) => {
+// 	return accumulator + currentValue;
+// });
+
+// //tracking maximum value
+// const maxVal = nums.reduce((max, curVal) => {
+// 	if (curVal > max) return curVal;
+// 	return max;
+// });
+
+// //also shorter using Math functions
+// const minVal = nums.reduce((min, curVal) => Math.min(min, curVal));
+
+// //reduce accepts another arguments: an initial value.
+// // if we don't specify it it uses the first value fo the
+// const newMinVal = nums.reduce((min, curVal) => Math.min(min, curVal), -2);
+
+//tallying: accumulator is an object (as init value)
+// const votes = [ 'y', 'n', 'y', 'y', 'y', 'n', 'y', 'n', 'n' ];
+
+// const results = votes.reduce((tally, curVal) => {
+// 	if (tally[curVal]) {
+// 		tally[curVal]++;
+// 	}
+// 	else {
+// 		tally[curVal] = 1;
+// 	}
+// 	return tally;
+// }, {});
+
+// //another way to write it:
+// const results2 = votes.reduce((tally, curVal) => {
+// 	tally[curVal] = (tally[curVal] || 0) + 1; //undefined or 0 in first encounter.
+// 	return tally;
+// }, {});
