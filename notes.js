@@ -474,3 +474,150 @@
 // 	tally[curVal] = (tally[curVal] || 0) + 1; //undefined or 0 in first encounter.
 // 	return tally;
 // }, {});
+
+// Section 11: A few miscellaneous JS Features
+// new-ish features of JS
+
+// default parameters/arguments:
+//old way:
+// function multiply(x, y) {
+// 	//or with terniary operators
+// 	if (typeof y === 'undefined') {
+// 		y = 1;
+// 	}
+// 	return x * y;
+// }
+
+// //new parameter syntax like in python. args with default values have to be defined after the ones without.
+// function product(x, y = 1) {
+// 	return x * y;
+// }
+
+// //another example
+// const greet = (person, greeting = 'hi') => {
+// 	console.log(`${greeting}, ${person}`);
+// };
+
+// spread
+// spread syntax allows an iterable such as an array to be expanded in places
+// where zero or more arguments (for function calls) or elements (for array literals)
+// are expected, or an object expression to be expanded in places where zero or more
+// key-value pairs (for object literals) are expected
+// represented with ...
+
+// //Spread for a function call
+// const nums = [ 9, 3, 2, 8 ];
+
+// Math.max(nums); //NaN!
+// //using spread to distribute the values from [, , , ] to , , , ,
+// Math.max(...nums);
+
+// //spreading strings works exactly the same way char by char
+
+// // Spread for an array litteral
+// const nums1 = [1,2,3,4];
+// const nums2 = [5,6,7,8];
+
+// let allNumbs = [...nums1, ...nums2];
+// //very usefull to make copies of arrays in new reference places so a proper copy.
+
+// // Spread in object literals
+// const feline = { legs: 4, family: 'Felidae' };
+// const canine = { family: 'Caninae', furry: true };
+// //using spread to "import" all values from another object
+// const dog = { ...canine, isPet: true };
+
+// const lion = { ...feline, genus: 'Panthera' };
+// const catDog = { ...feline, ...canine }; //notice that if two choices show up the the last one that was copied stays.
+// // in this case the canine properties replacing the family value for feline.
+// // order matters!
+// you can only spread an object when building another object. Otherwise now because it's not an iterable
+
+//this is allowed although not very used
+// {...[11,22,33]} //{0: 11, 1:22, 2:33} spreads by index
+
+// REST : ...
+// looks like spread but it's not!
+// kind of the opposite. It collects information into a single array
+//can be used when writting functions with unlimited/variable number of args
+//summing a hundred numbers
+//before they used an arguments object available inside every function.
+//but this is not available inside arrow functions and it's MEH
+// function sumOld() { //this doesn t work because arguments is an iterable but has no array methods.
+// 	return arguments.reduce((total, curVal) => { //we could solve this using spread to create a proper array
+//         return total+curVal
+//     })
+// }
+
+// //new nicer syntax
+// //Rest parameters: collects all remaining arguments into an actual array
+// function sumAll(...nums) {
+// 	let total = 0;
+// 	for (let n of nums) total += n;
+// 	return total;
+// }
+// //can also be used to collect all parameters that have not been matched
+// function fullName(first, last, ...titles) {
+// 	console.log('first', first);
+// 	console.log('last', last);
+// 	console.log('titles', titles);
+// }
+// //rest parameter has to be the last arg
+
+// //cool multiply with double implicit return and arrow fn and rest and reduce
+// const multiply = (...nums) => (
+//     nums.reduce((total, curVal) => total*curVal)
+// )
+
+// Destructuring: clean syntax to unpack values from arrays or properties from objects into distinct variables
+//if we have race results from a marathon
+// const raceResults = [ 'Chui', 'Rodrigo', 'Hernan', 'Pablo', 'Rey del After' ];
+//bad way to assign medal variables would be this
+// const gold = raceResults[0]
+// const silver = raceResults[1]
+// const bronce = raceResults[2]
+
+// //better way
+// // const [ gold, silver, bronce ] = raceResults;
+
+// //if we want to skip elements:
+// const [ first, , , fourth ] = raceResults;
+// //using rest to unpack all remaining values (after skipping would work the same way)
+// const [ winner, ...others ] = raceResults;
+
+// Destructuring objects. We unpack based on keys/name of properties
+// const runner = {
+// 	first   : 'Eliud',
+// 	last    : 'Lpa',
+// 	country : 'Kenya',
+// 	title   : 'Mother of dragons'
+// };
+
+// const { first, last } = runner;
+// //variables must be existing key names but then we can rename them
+// const { country: nation } = runner;
+
+// const { first, last, ...others } = runner;
+
+// this logic works also in nested objects
+
+// // Destructuring parameters
+// //per example when using objects as args and we only want some properties in the fn
+// const runner = {
+// 	first   : 'Eliud',
+// 	last    : 'Lpa',
+// 	country : 'Kenya',
+// 	title   : 'Mother of dragons'
+// };
+
+// const fullName = ({ first, last }) => {
+// 	return `${first} ${last}`;
+// };
+
+//we can also use this in arrays
+// in this example we only want the 2nd elements of the array as arg
+const response = [ 'HHTP/1.1', '200 OK', 'application/json' ];
+
+function parseResponde([ , statusCode ]) {
+	return statusCode;
+}
