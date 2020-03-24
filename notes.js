@@ -616,8 +616,110 @@
 
 //we can also use this in arrays
 // in this example we only want the 2nd elements of the array as arg
-const response = [ 'HHTP/1.1', '200 OK', 'application/json' ];
+// const response = [ 'HHTP/1.1', '200 OK', 'application/json' ];
 
-function parseResponde([ , statusCode ]) {
-	return statusCode;
-}
+// function parseResponde([ , statusCode ]) {
+// 	return statusCode;
+// }
+
+// Section 12: Object Methods and the 'This' Keyword
+
+//Short hand to create objects with key:value pairs from variables
+
+// const getStats = (arr) => {
+// 	const max = Math.max(...arr);
+// 	const min = Math.min(...arr);
+// 	const sum = arr.reduce((sum, r) => sum + r);
+// 	const avg = sum / arr.length;
+// 	return {
+// 		// instead of writing all values we use the short-cut
+// 		max,
+// 		min,
+// 		sum,
+// 		avg
+// 	};
+// };
+
+// Computed properties
+//properties with dynamic keys
+// with this we can use a variable as a key name in an object literal property!
+
+// const user = 'Julio';
+
+// const userRoles = {
+// 	[user] : 'Admin' // instead of having to first create the empty object and then calling userRoles[user]
+// };
+
+// //another example adding a property to an object
+// const addProp = (obj, k, v) => {
+// 	return {
+// 		...obj,
+// 		[k] : v
+// 	};
+// };
+
+//Adding methods to objects: we can add functions as properties on objects. We call them methods!
+//That's how we group cohesive fns together
+// const math = {
+// 	//we could also include simply the name of the fn if it was already define elsewhere
+// 	multiply : function(x, y) {
+// 		return x * y;
+// 	},
+// 	divide   : function(x, y) {
+// 		return x / y;
+// 	},
+// 	square   : function(x) {
+// 		return x * x;
+// 	}
+// };
+
+// //Method short hand syntax
+// const math2 = {
+// 	add(x, y) {
+// 		return x + y;
+// 	}
+// };
+
+//Intro to keyword THIS
+// this; keyword is a reference to the current execution scope. It's gonna give an object back
+
+// function sayHi() {
+// 	console.log('HI');
+// 	console.log(this); //refers to the window (in this case the browser) there sayHi and many other methods like alert or console.log live
+// }
+//alert == window.alert
+//window is global scope
+// var variables are added to the window, let and const aren't
+//not super userful to reference the window but we'll see that it makes sense
+
+//using the THIS method
+
+// const person = {
+// 	first    : 'Cherilyn',
+// 	last     : 'Sarkisian',
+// 	nickName : 'Cher',
+// 	fullName() {
+// 		//console.log(`${this.first} ${this.last} AKA ${this.nickname}`); //here it is not logging the window
+// 		//now it refers to the object that method is inside of.
+// 		//or using destructuring objects
+// 		const { first, last, nickName } = this;
+// 		return `${first} ${last} AKA ${nickName}`;
+// 	},
+// 	bio() {
+// 		return `${this.fullName()} is a person!`; //way more dynamic!
+// 	}
+// };
+
+//THIS invocation context
+//The value of THIS depends in the invocation context of the function it is used in
+//This means it doesn't only depend on where we write the function, but where it is executed
+
+//if we called the function from somewhere else, this is different
+//const printBio = person.printBio;
+//printBio crashes because this THIS doesn't have the same attributes
+//if we use a method X.method then we clearly know which THIS we are using. If the method has nothing to its left, it's probably window then
+
+//Arrow functions do not get their own version of THIS!!
+//that's why we usually don't use arrow functions when defining methods in objects
+
+//Annoyomatic Demo
