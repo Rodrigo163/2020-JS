@@ -723,3 +723,115 @@
 //that's why we usually don't use arrow functions when defining methods in objects
 
 //Annoyomatic Demo
+//list of annoying phrases
+//we want to print one of these phrases every X miliseconds
+// const annoyer = {
+// 	phrases    : [ 'lit', 'cray cray', "I can't even", 'YOLO' ],
+// 	pickPhrase() {
+// 		const { phrases } = this; //to gather the array from outside
+// 		const indx = Math.floor(Math.random() * phrases.length);
+// 		return phrases[indx];
+// 	},
+// 	start() {
+// 		this.timerId = setInterval(() => {
+// 			//adding the timerID so we can reference it in the stop method
+// 			//using arrow fn because they don't get their own THIS, so it is still the same as in the parent scope
+// 			console.log(this.pickPhrase());
+// 		}, 3000);
+// 	},
+// 	stop() {
+// 		clearInterval(this.timerId);
+// 		console.log('Thank heavens that is over');
+// 	}
+// };
+
+//Putting all together: Deck of cards
+//putting functions and data in same place
+// const myDeck = {
+// 	deck           : [],
+// 	drawnCards     : [],
+// 	suits          : [ 'hearts', 'diamonds', 'spades', 'clubs' ],
+// 	values         : '2,3,4,5,6,7,8,9,10,J,Q,K,A',
+// 	initializeDeck() {
+// 		const { suits, values, deck } = this;
+// 		for (let value of values.split(',')) {
+// 			for (let suit of suits) {
+// 				deck.push({
+// 					value,
+// 					suit
+// 				});
+// 			}
+// 		}
+// 	},
+// 	drawCard() {
+// 		const card = this.deck.pop();
+// 		this.drawnCards.push(card);
+// 		return card;
+// 	},
+// 	drawMultiple(numCards) {
+// 		const cards = [];
+// 		for (let i = 0; i < numCards; i++) {
+// 			cards.push(this.drawCard());
+// 		}
+// 		return cards;
+// 	},
+// 	shuffle() {
+// 		const { deck } = this;
+// 		//simple method to shuffle an array. Not focusing on randomness degree
+// 		//loop over array backwards
+// 		for (let i = deck.length - 1; i > 0; i--) {
+// 			//pick random index before current element
+// 			let j = Math.floor(Math.random() * i + 1);
+// 			//swap
+// 			[ deck[i], deck[j] ] = [ deck[j], deck[i] ];
+// 		}
+// 	}
+// };
+
+//creating a deck factory
+//a way of making multiple decks using what we already know. There are better ways (probably classes?)
+//copy everything inside this "builder"
+// const makeDeck = () => {
+// 	return {
+// 		deck           : [],
+// 		drawnCards     : [],
+// 		suits          : [ 'hearts', 'diamonds', 'spades', 'clubs' ],
+// 		values         : '2,3,4,5,6,7,8,9,10,J,Q,K,A',
+// 		initializeDeck() {
+// 			const { suits, values, deck } = this;
+// 			for (let value of values.split(',')) {
+// 				for (let suit of suits) {
+// 					deck.push({
+// 						value,
+// 						suit
+// 					});
+// 				}
+// 			}
+// 		},
+// 		drawCard() {
+// 			const card = this.deck.pop();
+// 			this.drawnCards.push(card);
+// 			return card;
+// 		},
+// 		drawMultiple(numCards) {
+// 			const cards = [];
+// 			for (let i = 0; i < numCards; i++) {
+// 				cards.push(this.drawCard());
+// 			}
+// 			return cards;
+// 		},
+// 		shuffle() {
+// 			const { deck } = this;
+// 			//simple method to shuffle an array. Not focusing on randomness degree
+// 			//loop over array backwards
+// 			for (let i = deck.length - 1; i > 0; i--) {
+// 				//pick random index before current element
+// 				let j = Math.floor(Math.random() * i + 1);
+// 				//swap
+// 				[ deck[i], deck[j] ] = [ deck[j], deck[i] ];
+// 			}
+// 		}
+// 	};
+// };
+
+// const myDeck = makeDeck();
